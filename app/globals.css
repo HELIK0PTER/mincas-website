@@ -77,3 +77,26 @@
       --ring: 212.7 26.8% 83.9%;
     }
   }
+
+@layer components {
+  .lds-dual-ring::after {
+    content: " ";
+    display: block;
+    width: 20px; /* 64px */
+    height: 20px; /* 64px */
+    border-radius: 50%;
+    border: 2px solid currentColor; /* 6.4px */
+    border-color: currentColor transparent currentColor transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
