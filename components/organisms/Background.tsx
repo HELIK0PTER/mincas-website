@@ -1,5 +1,6 @@
 import React from 'react';
 import {twMerge} from "tailwind-merge";
+import Content from "@/components/templates/Content";
 
 interface BackgroundProps {
 	children: React.ReactNode;
@@ -12,16 +13,18 @@ const Background = (
 	}: BackgroundProps
 ) => {
 	const colorVariants = {
-		primary: "bg-primary",
+		primary: "bg-primary text-white",
 		secondary: "bg-secondary",
 		background: "bg-background",
 		none: "",
 	};
 
 	return (
-		<div className={twMerge('bg-inherit', `${colorVariants[color]} flex justify-center w-full`)}>
-			<div className={`flex items-center p-4 w-full max-w-[1500px]`}>
-				{children}
+		<div className={twMerge('bg-inherit', `${colorVariants[color]} flex justify-center w-full h-full`)}>
+			<div className={`flex justify-center px-4 w-full max-w-[900px] h-full`}>
+				<Content>
+					{children}
+				</Content>
 			</div>
 		</div>
 	);

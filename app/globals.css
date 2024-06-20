@@ -4,7 +4,6 @@
 
   @layer base {
     :root {
-      --background: #FFF4E6;
       --foreground: 222.2 84% 4.9%;
 
       --card: 0 0% 100%;
@@ -100,3 +99,23 @@
   }
 }
 
+/* style of the scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #223A3D;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #335d62;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(51, 93, 98, 0.64);
+}

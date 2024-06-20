@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/organisms/Header";
 import Footer from "@/components/organisms/Footer";
 import Background from "@/components/organisms/Background";
+import Content from "@/components/templates/Content";
 
 const inter = Allerta_Stencil({
   subsets: ["latin"],
@@ -21,17 +22,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} flex flex-col min-h-screen bg-background
+    <html lang="en" className={`
+        scroll-smooth
+        `}>
+      <body className={`${inter.className} 
+        flex flex-col 
+        min-h-screen 
+        bg-background
         text-neutral text-md
+        overflow-y-visible
       `}>
-        <div className={`flex-1`}>
-          <Header />
-          <Background>
-            {children}
-          </Background>
-        </div>
-        <Footer />
+        <Content>
+          {children}
+        </Content>
       </body>
     </html>
   );
