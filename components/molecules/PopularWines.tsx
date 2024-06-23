@@ -26,9 +26,9 @@ const PopularWines = () => {
 			// select max 3 wines ordered by rating from highest to lowest
 			let { data: wines, error, status } = await supabase
 				.from('wines')
-				.select('name')
+				.select('id, name, image_url, price, spare_normal')
 				.order('rating', { ascending: false , nullsFirst: false})
-				.limit(3)
+				.limit(4)
 
 			if (wines) {
 				setPopularWines(wines)
@@ -48,7 +48,7 @@ const PopularWines = () => {
 	return (
 		<div
 			className={`
-        grid gris-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5
+        grid gris-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5
       `}
 		>
 			{
@@ -62,24 +62,42 @@ const PopularWines = () => {
 									h-full
 								`}
 							>
-								<Image
-									alt={wine.name}
-									src={
-										`https://yuubtmxvlqkzydwjxuhf.supabase.co/storage/v1/object/public/photos/wine-photos/${wine.name.toLowerCase().replaceAll(" ", "_")}.jpg`
-									}
-									className={`
-										object-cover
-										rounded-xl
-									`}
-								/>
 								<div
 									className={`
-										flex flex-col items-center gap-5 
-										font-medium text-lg
+											flex justify-center
+											h-72
+											w-full
+										`}
+								>
+									<Image
+										alt={wine.name}
+										src={wine.image_url}
+										className={`
+										rounded-xl
+										h-full
+										w-auto
+										shadow-gray-900 shadow-md
+										`}
+										width={500}
+										height={500}
+									/>
+								</div>
+								<div
+									className={`
+										flex flex-col items-center gap-0 
+										mt-5
+										font-medium text-sm
+										text-center
 									`}
 								>
-									<p className={`text-center`}>
+									<p>
 										{wine.name}
+									</p>
+									<p>
+										{wine.price} R$
+									</p>
+									<p className={`mt-3`}>
+										Stock : {wine.spare_normal}
 									</p>
 								</div>
 							</div>

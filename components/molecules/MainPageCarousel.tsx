@@ -114,7 +114,7 @@ function MainPageCarousel(
 									{
 										<Image priority={true}
                           alt={wine.name}
-                          src={`https://yuubtmxvlqkzydwjxuhf.supabase.co/storage/v1/object/public/photos/wine-photos/${wine.name.toLowerCase().replaceAll(" ", "_")}.jpg`}
+                          src={wine.image_url}
                           width={500} height={500}
                           className={`h-[320px] md:h-[350px] w-auto rounded-xl select-none`}
 										/>

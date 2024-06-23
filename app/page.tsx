@@ -25,7 +25,7 @@ export default function Home() {
                 <h1 className={``}>Minca</h1>
                 <p className={``}>Vinhos Naturais</p>
               </div>
-              <div className={`flex flex-col xl:flex-row gap-20 justify-center`}>
+              <div className={`flex flex-col xl:flex-row gap-20 justify-center items-center`}>
                 <div
                   className={`flex flex-col justify-between items-center w-[350px] md:w-[400px] h-[350px] md:h-[380px]`}
                 >
