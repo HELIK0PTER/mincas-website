@@ -1,4 +1,4 @@
- "use client"
+"use client"
 
 import
 	React,
@@ -12,6 +12,8 @@ import
 import {createClient} from "@/utils/supabase/client";
 
 import Image from 'next/image'
+ import Loading from "@/components/atoms/Loading";
+import Link from "next/link";
 
 const PopularWines = () => {
 
@@ -55,12 +57,15 @@ const PopularWines = () => {
 				popularWines.map((wine: any) => {
 					return (
 						<>
-							<div
+							<Link
 								key={wine.name}
+								href={`/wines/${wine.id}`}
 								className={`
 									flex flex-col justify-between items-center
 									h-full
-								`}
+									hover:underline hover:underline-offset-2 hover:cursor-pointer
+									hover:scale-[1.01]
+									`}
 							>
 								<div
 									className={`
@@ -69,18 +74,21 @@ const PopularWines = () => {
 											w-full
 										`}
 								>
-									<Image
-										alt={wine.name}
-										src={wine.image_url}
-										className={`
+									{
+										loading ? <Loading/> :
+											<Image
+												alt={wine.name}
+												src={wine.image_url}
+												className={`
 										rounded-xl
 										h-full
 										w-auto
 										shadow-gray-900 shadow-md
 										`}
-										width={500}
-										height={500}
-									/>
+												width={500}
+												height={500}
+											/>
+									}
 								</div>
 								<div
 									className={`
@@ -100,7 +108,7 @@ const PopularWines = () => {
 										Stock : {wine.spare_normal}
 									</p>
 								</div>
-							</div>
+							</Link>
 						</>
 					);
 				})

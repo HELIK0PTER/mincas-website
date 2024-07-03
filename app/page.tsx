@@ -9,7 +9,7 @@ import Footer from "@/components/organisms/Footer";
 import React from "react";
 import PopularWines from "@/components/molecules/PopularWines";
 
-export default function Home() {
+export default async function Home() {
 
   return (
     <div className={`flex flex-grow`}>
@@ -68,7 +68,7 @@ export default function Home() {
               </div>
             </Section>
             <Section id={`about`}>
-              <p>Caio Ana</p><p>Caio Ana</p><p>Caio Ana</p><p>Caio Ana</p><p>Caio Ana</p><p>Caio Ana</p>
+              <p>Explications</p>
             </Section>
           </main>
         <Footer/>

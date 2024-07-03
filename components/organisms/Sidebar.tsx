@@ -69,13 +69,13 @@ const Sidebar = () => {
 				<InnerSection>
 					<p className={`w-full text-center`}>Ver Mais</p>
 					<LinksMenu>
-						<LinkButton href={`#presentation`} className={`border-primary border-2 text-primary hover:text-white`}>
+						<LinkButton href={`/about`} className={`border-primary border-2 text-primary hover:text-white`}>
 							Mincarone, à Historia
 						</LinkButton>
-						<LinkButton href={`#wines`} className={`border-primary border-2 text-primary hover:text-white`}>
+						<LinkButton href={`/wines`} className={`border-primary border-2 text-primary hover:text-white`}>
 							Catalogo de Vinhos
 						</LinkButton>
-						<LinkButton href={`#contact`} className={`border-primary border-2 text-primary hover:text-white`}>
+						<LinkButton href={`/contact`} className={`border-primary border-2 text-primary hover:text-white`}>
 							Nosso Contato
 						</LinkButton>
 					</LinksMenu>

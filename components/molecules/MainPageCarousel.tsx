@@ -7,7 +7,6 @@ import {createClient} from "@/utils/supabase/client";
 
 import {
 	Carousel,
-	CarouselApi,
 	CarouselContent,
 	CarouselItem,
 	CarouselNext,
@@ -19,14 +18,7 @@ type wine = {
 	image_url: string,
 }
 
-function MainPageCarousel(
-	{
-		...props
-	}:
-		{
-		}
-) {
-	const [api , setApi] = useState<CarouselApi | null>(null)
+function MainPageCarousel () {
 
 	const [loading, setLoading] = useState(true)
 	const [wines, setWines] = useState([]) as any[]
@@ -86,14 +78,6 @@ function MainPageCarousel(
 					align: 'center',
 					loop: true,
 				}}
-
-				onDragEnd={() => {
-					if (api) {
-						api.scrollPrev
-					}
-				}
-				}
-				setApi={setApi}
 			>
 				{loading ? (
 					<CarouselContent>
