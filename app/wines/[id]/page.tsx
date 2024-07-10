@@ -1,47 +1,49 @@
-"use client"
-
 import Background from "@/components/organisms/Background";
 import {createClient} from "@/utils/supabase/client";
-import {useCallback, useEffect, useState} from "react";
+import {price} from "@/utils/functions";
 import Image from "next/image";
 
-export default function Page({ params }: { params: { id: string } }) {
+async function getWine(id: string) {
 	const supabase = createClient();
 
-	const [loading, setLoading] = useState(true)
-	const [wine, setWine] = useState({}) as any;
+	const {data, error} = await supabase.from("wines").select("*").eq('id', id);
+	if (error) throw error;
+	return (
+		<div className={`my-2`}>
+			{data.map((wine) => (
+				<div
+					key={wine.id}
+					className={`flex flex-col items-center gap-5 p-5 bg-white rounded-xl shadow-lg h-96 hover:scale-[101%]`}>
+					<Image
+						alt={wine.name}
+						src={wine.image_url}
+						width={200}
+						height={200}
+						className={`w-[60%] h-auto rounded-md`}
+					/>
+					<div className={`flex flex-1 flex-col justify-start font-medium text-md`}>
+						<p className={`text-center font-semibold`}>{wine.name}</p>
+						<p className={`text-center`}>{wine.vintage}</p>
+						{
+							wine.price_reduction > 0 ? (
+								<div className={`flex flex-1 flex-col justify-end text-center`}>
+									<div><p className={`line-through`}>{price(wine.price)}</p> <p>{price(wine.price * (1 - wine.price_reduction / 100))}</p></div>
+								</div>
+							) :
+								<p className={`flex flex-1 flex-col justify-end text-center`}>{price(wine.price)}</p>
+						}
+					</div>
+				</div>
+			))}
+		</div>
+	);
+}
 
-	const getWine = useCallback(async () => {
-		try {
-			setLoading(true)
-			// select wine by id
-			let { data: wine, error, status } = await supabase
-				.from('wines')
-				.select('name, image_url')
-				.eq('id', params.id)
-				.single()
-
-			if (wine) {
-				setWine(wine)
-			}
-		} catch (error) {
-			alert("Error loading wine data ...")
-			console.log('error: ', error)
-		} finally {
-			setLoading(false)
-		}
-	}, [supabase, params.id])
-
-	useEffect(() => {
-		getWine().then()
-	}, []);
-
+export default async function Page({ params }: { params: { id: string } }) {
+	const wine = await getWine(params.id);
 	return (
 		<Background>
-			<div>
-				<h1>{wine.name}</h1>
-				<Image alt={wine.name} src={wine.image_url} width={200} height={200} className={`w-[60%] h-auto`}/>
-			</div>
+			{wine}
 		</Background>
 	)
 }

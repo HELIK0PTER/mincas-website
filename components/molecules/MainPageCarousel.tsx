@@ -1,6 +1,3 @@
-"use client"
-
-import {useCallback, useEffect, useState} from 'react'
 import Image from 'next/image'
 
 import {createClient} from "@/utils/supabase/client";
@@ -18,38 +15,53 @@ type wine = {
 	image_url: string,
 }
 
-function MainPageCarousel () {
+async function fetchWines() {
+	const client = createClient()
+	const {data, error} = await client
+		.from('wines')
+		.select('name, image_url')
+		.limit(5) as {data: wine[], error: any}
+	return (
 
-	const [loading, setLoading] = useState(true)
-	const [wines, setWines] = useState([]) as any[]
+		<Carousel
+			className={`flex justify-center items-center relative h-full w-full rounded-xl`}
+			opts={{
+				align: 'center',
+				loop: true,
+			}}
+		>
+			<CarouselContent className={`relative z-30 rounded-xl h-[350px] md:h-[380px]`}>
+				{data.map((wine: wine, index: number) =>
+					(
+						<CarouselItem
+							key={index}
+							className={`basis-00 px-3 z-50 flex justify-center items-center h-full rounded-xl`}
 
-	const supabase = createClient();
+						>
+							{
+                  <Image priority={true}
+                         alt={wine.name}
+                         src={wine.image_url}
+                         width={500} height={500}
+                         className={`h-[320px] md:h-[350px] w-auto rounded-xl select-none`}
+                  />
+								??
+                  <div className="lds-dual-ring relative"/>
+							}
 
-	const getWines = useCallback(async () => {
-			try {
-				setLoading(true)
+						</CarouselItem>
+					)
+				)}
+			</CarouselContent>
+			<CarouselPrevious className={`z-50 text-secondary absolute scale-125 top-1/2 left-5 bg-primary`}/>
+			<CarouselNext className={`z-50 text-secondary absolute scale-125 top-1/2 right-5 bg-primary`}/>
+		</Carousel>
+	)
+}
 
-				// select max 10 wines ordered by rating from highest to lowest
-				let { data: wines, error, status } = await supabase
-					.from('wines')
-					.select('name, image_url')
-					.order('rating', { ascending: false , nullsFirst: false})
-					.limit(10)
+async function MainPageCarousel () {
 
-				if (wines) {
-					setWines(wines)
-				}
-			} catch (error) {
-				alert("Error loading wines data ...")
-				console.log('error: ', error)
-			} finally {
-				setLoading(false)
-			}
-		}, [supabase])
-
-	useEffect(() => {
-		getWines().then()
-	}, [getWines])
+	const wines = await fetchWines()
 
 	return (
 		<div
@@ -72,48 +84,7 @@ function MainPageCarousel () {
 					pointer-events-none
 					`}
 			/>
-			<Carousel
-				className={`flex justify-center items-center relative h-full w-full rounded-xl`}
-				opts={{
-					align: 'center',
-					loop: true,
-				}}
-			>
-				{loading ? (
-					<CarouselContent>
-						<div className={`flex justify-center items-center gap-3 h-[350px] md:h-[380px]`}>
-							<p>Loading</p>
-							<div className="lds-dual-ring relative"/>
-						</div>
-					</CarouselContent>
-				) : (
-					<CarouselContent className={`relative z-30 rounded-xl h-[350px] md:h-[380px]`}>
-						{wines.map((wine: wine, index: number) =>
-							(
-								<CarouselItem
-									key={index}
-									className={`basis-00 px-3 z-50 flex justify-center items-center h-full rounded-xl`}
-
-								>
-									{
-										<Image priority={true}
-                          alt={wine.name}
-                          src={wine.image_url}
-                          width={500} height={500}
-                          className={`h-[320px] md:h-[350px] w-auto rounded-xl select-none`}
-										/>
-										??
-										<div className="lds-dual-ring relative"/>
-									}
-
-								</CarouselItem>
-							)
-						)}
-					</CarouselContent>
-				)}
-				<CarouselPrevious className={`z-50 text-secondary absolute scale-125 top-1/2 left-5 bg-primary`}/>
-				<CarouselNext className={`z-50 text-secondary absolute scale-125 top-1/2 right-5 bg-primary`}/>
-			</Carousel>
+			{wines}
 		</div>
 	);
 }

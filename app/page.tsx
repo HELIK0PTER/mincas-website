@@ -8,6 +8,7 @@ import Sidebar from "@/components/organisms/Sidebar";
 import Footer from "@/components/organisms/Footer";
 import React from "react";
 import PopularWines from "@/components/molecules/PopularWines";
+import Link from "next/link";
 
 export default async function Home() {
 
@@ -62,9 +63,11 @@ export default async function Home() {
                 className={`py-16 gap-8 flex flex-col items-center justify-center`}
               >
                 <PopularWines/>
-                <Button>
-                  Ver Mais
-                </Button>
+                <Link href={`/wines`}>
+                  <Button>
+                    Ver Mais
+                  </Button>
+                </Link>
               </div>
             </Section>
             <Section id={`about`}>
