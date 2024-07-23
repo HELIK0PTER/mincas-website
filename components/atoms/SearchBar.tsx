@@ -13,7 +13,7 @@ const SearchBar = () => {
 	}
 
 	return (
-		<div className={`relative bg-primary rounded-full pr-2 mb-2
+		<div className={`relative bg-primary rounded-full pr-2 my-1
 		                 min-w-44
 		                 flex justify-between items-center`}
 		>

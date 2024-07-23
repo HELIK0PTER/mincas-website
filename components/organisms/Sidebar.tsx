@@ -1,85 +1,84 @@
 "use client"
 
-import React, {useEffect, useState} from 'react';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+
+
 import Link from "next/link";
 
-import {Logo1} from "@/components/atoms/logos";
 import SearchBar from '@/components/atoms/SearchBar';
 import { HorizontalSeparator } from '@/components/atoms/separators';
+import {Logo1} from "@/components/atoms/logos";
+
 import {cn} from "@/lib/utils";
+
+import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
 
-	const [currentSection, setCurrentSection] = useState('presentation')
-
-	const [scrollPercentage, setScrollPercentage] = useState(0)
-
-	useEffect(() => {
-		const handleScroll = () => {
-			const scroll = window.scrollY
-			const height = document.documentElement.scrollHeight - window.innerHeight
-			const scrolled = (scroll / height) * 100
-			setScrollPercentage(scrolled)
-		}
-
-		const handleSection = () => {
-			const sections = document.querySelectorAll('section')
-			const scroll = window.scrollY
-			const scrollHeight = document.documentElement.scrollHeight
-			const scrolled = (scroll / scrollHeight) * 100
-			setScrollPercentage(scrolled)
-			sections.forEach(section => {
-				const sectionTop = section.offsetTop
-				const sectionHeight = section.clientHeight
-				if (scroll >= (sectionTop-250) && scroll < (sectionTop-250) + sectionHeight) {
-					setCurrentSection(section.id)
-				}
-			})
-		}
-
-		window.addEventListener('scroll', handleScroll)
-		window.addEventListener('scroll', handleSection)
-
-		return () => {
-			window.removeEventListener('scroll', handleScroll)
-			window.removeEventListener('scroll', handleSection)
-		}
-	}, []);
-
 	return (
-		<main className={`fixed flex flex-col w-72 p-4 h-screen bg-secondary border-r-2 border-primary`}>
-			<Logo1/>
-			<HorizontalSeparator/>
-			<SearchBar/>
+		<main className={`flex flex-col w-72 p-4 h-screen bg-secondary border-r-2 border-primary`}>
+			<Link href={`/`}><Logo1/></Link>
+			<div className="flex flex-col justify-between mt-2">
+				<HorizontalSeparator/>
+				<SearchBar/>
+				<HorizontalSeparator/>
+			</div>
 			<div className={`flex-1 flex flex-col p-2 justify-start overflow-y-auto`}>
-				<InnerSection>
-					<p className={`w-full text-center`}>Navegação</p>
-					<LinksPageMenu>
-						<LinkButton className={cn('bg-secondary text-primary',`${currentSection === "presentation" && `bg-primary text-white`} hover:text-black`)} href={`#presentation`}>
-							Presentação
-						</LinkButton>
-						<LinkButton className={cn('bg-secondary text-primary',`${currentSection === "wines" && `bg-primary text-white`} hover:text-black`)} href={`#wines`}>
-							Vinhos
-						</LinkButton>
-						<LinkButton className={cn('bg-secondary text-primary',`${currentSection === "about" && `bg-primary text-white`} hover:text-black`)} href={`#about`}>
-							Sobre Nós
-						</LinkButton>
-					</LinksPageMenu>
-				</InnerSection>
-				<InnerSection>
-					<p className={`w-full text-center`}>Ver Mais</p>
-					<LinksMenu>
-						<LinkButton href={`/about`} className={`border-primary border-2 text-primary hover:text-white`}>
-							Mincarone, à Historia
-						</LinkButton>
-						<LinkButton href={`/wines`} className={`border-primary border-2 text-primary hover:text-white`}>
-							Catalogo de Vinhos
-						</LinkButton>
-						<LinkButton href={`/contact`} className={`border-primary border-2 text-primary hover:text-white`}>
-							Nosso Contato
-						</LinkButton>
-					</LinksMenu>
-				</InnerSection>
+				<LinksMenu>
+					
+					<Accordion type="single" collapsible>
+
+						<AccordionItem value="item-1">
+						<div className="flex justify-between gap-2">
+							<LinkButton href={`/`} className="flex-1">
+								Menu
+							</LinkButton>
+						</div>
+						</AccordionItem>
+
+						<AccordionItem value="item-2">
+						<div className="flex justify-between gap-2">
+							<LinkButton href={`/wines`} className="flex-1">
+								Catalogo
+							</LinkButton>
+							<AccordionTrigger className="flex justify-center items-center border-2 border-primary rounded-md p-0 px-[15px]"></AccordionTrigger>
+						</div>
+						<AccordionContent>
+							Yes. It adheres to the WAI-ARIA design pattern.
+						</AccordionContent>
+						</AccordionItem>
+
+						<AccordionItem value="item-3">
+						<div className="flex justify-between gap-2">
+							<LinkButton href={`/about`} className="flex-1">
+								Nossa Historia
+							</LinkButton>
+							<AccordionTrigger className="flex justify-center items-center border-2 border-primary rounded-md p-0 px-[15px]"></AccordionTrigger>
+						</div>
+						<AccordionContent>
+							Yes. It adheres to the WAI-ARIA design pattern.
+						</AccordionContent>
+						</AccordionItem>
+
+						<AccordionItem value="item-4">
+						<div className="flex justify-between gap-2">
+							<LinkButton href={`/contact`} className="flex-1">
+								Nosso Contato
+							</LinkButton>
+							<AccordionTrigger className="flex justify-center items-center border-2 border-primary rounded-md p-0 px-[15px]"></AccordionTrigger>
+						</div>
+						<AccordionContent>
+							Yes. It adheres to the WAI-ARIA design pattern.
+						</AccordionContent>
+						</AccordionItem>
+						
+					</Accordion>
+				</LinksMenu>
 			</div>
 			<div>
 				Login
@@ -88,20 +87,21 @@ const Sidebar = () => {
 	);
 };
 
-/*
-*
-				<div
-					className={`
-						flex-1
-						flex flex-col gap-2
-						pt-4 px-2
-					`}
-				>
-					Login
-				</div>
-* */
-
 export default Sidebar;
+
+const PopoverText = (
+	{
+		children,
+	} : {
+		children : React.ReactNode
+	}
+) => {
+	return (
+		<p
+			className={`hover:underline`}
+		>{children}</p>
+	)
+}
 
 const LinkButton = (
 	{
@@ -115,18 +115,23 @@ const LinkButton = (
 		className? : string
 	}
 ) => {
-	// compare the href with the clientIdRef
-	// if they are the same, add a bg color
+	
+	const path = usePathname();
 
 	return (
 		<Link
 			href={href}
 			className={cn(`
-				text-white
-				hover:bg-primary
-				bg-secondary			
+				text-primary
+				hover:text-white
+				bg-secondary
+				hover:bg-primary			
 				rounded-sm p-2
+				border-2 border-primary
 				transition-all duration-100
+				${
+					href === path ? 'bg-primary text-white hover:opacity-80' : ''
+				}
 				`,
 				className,
 				{...props}
@@ -150,40 +155,6 @@ const LinksMenu = (
 				`flex flex-col justify-between p-1 gap-1 rounded-md relative`
 			}
 		>
-			{children}
-		</div>
-	)
-}
-
-const LinksPageMenu = (
-	{
-		children,
-	} : {
-		children : React.ReactNode,
-	}
-) => {
-	return (
-		<div
-			className={
-				`flex flex-col justify-between p-1 gap-1 bg-primary rounded-md relative text-sm`
-			}
-		>
-			{children}
-		</div>
-	)
-}
-
-const InnerSection = (
-	{
-		children,
-	} :
-		{
-			children : React.ReactNode
-		}
-) => {
-	return (
-		<div>
-			<HorizontalSeparator/>
 			{children}
 		</div>
 	)

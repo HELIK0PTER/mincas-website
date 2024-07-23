@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Allerta_Stencil } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/organisms/Header";
+
+import Sidebar from "@/components/organisms/Sidebar";
 import Footer from "@/components/organisms/Footer";
-import Background from "@/components/organisms/Background";
-import Content from "@/components/templates/Content";
 
 const inter = Allerta_Stencil({
   subsets: ["latin"],
@@ -26,15 +25,21 @@ export default function RootLayout({
         
         `}>
       <body className={`${inter.className} 
-        flex flex-col 
-        min-h-screen 
+        flex
+        h-screen
         bg-background
         text-neutral text-md
         overflow-y-visible
       `}>
-        <Content>
-          {children}
-        </Content>
+        <Sidebar />
+        <div className="flex flex-col flex-1 justify-between overflow-auto scroll-smooth">
+          <div className="flex flex-col flex-1 py-10">
+            {children}
+          </div>
+          <div>
+            <Footer />
+          </div>
+        </div>
       </body>
     </html>
   );

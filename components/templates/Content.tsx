@@ -9,11 +9,9 @@ const Content = (
 		}
 ) => {
 	return (
-		<div className={`flex flex-col h-full justify-center relative`}>
+		<div id="test" className={`flex flex-1 flex-col h-full relative`}>
 			{children}
-			<div className={`invisible`}></div>
 		</div>
 	);
 };
-
 export default Content;

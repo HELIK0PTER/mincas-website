@@ -3,6 +3,7 @@ import {createClient} from "@/utils/supabase/client";
 import Image from "next/image";
 import Link from "next/link";
 import {price} from "@/utils/functions";
+import Section from "@/components/templates/Section";
 
 async function getWines() {
 	const supabase = createClient();
@@ -45,8 +46,12 @@ export default async function Page() {
 	const wines = await getWines();
 
 	return (
-		<Background>
-			{wines}
-		</Background>
+		<main>
+			<Section id={`wines`}>
+				<div className="w-[70%]">
+					{wines}
+				</div>
+			</Section>
+		</main>
 	);
 };
