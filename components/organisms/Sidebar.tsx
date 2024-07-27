@@ -28,96 +28,27 @@ const Sidebar = () => {
 				<SearchBar/>
 				<HorizontalSeparator/>
 			</div>
-			<div className={`flex-1 flex flex-col p-2 justify-start overflow-y-auto`}>
+			<div className={`flex-1 flex flex-col py-2 justify-start overflow-y-auto`}>
 				<LinksMenu>
-					
-					<Accordion type="single" collapsible>
-
-						<AccordionItem value="item-1">
-							<div className="flex justify-between gap-2">
-								<LinkButton href={`/`} className="flex-1">
-									Menu
-								</LinkButton>
-							</div>
-						</AccordionItem>
-
-						<AccordionItem value="item-2">
-							<div className="flex justify-between gap-2">
-								<LinkButton href={`/wines`} className="flex-1">
-									Catalogo
-								</LinkButton>
-								<AccordionTrigger className="flex justify-center items-center border-2 border-primary rounded-md p-0 px-[15px]"></AccordionTrigger>
-							</div>
-							<AccordionContent>
-								<div className="flex flex-col m-0.5 gap-0.5">
-									<LinkButton href={`/wines?filter=todos`} className="">
-										Todos
-									</LinkButton>
-									<LinkButton href={`/wines?filter=brancos`} className="">
-										Brancos
-									</LinkButton>
-									<LinkButton href={`/wines?filter=tintos`} className="">
-										Tintos
-									</LinkButton>
-									<LinkButton href={`/wines?filter=espumantes`} className="">
-										Espumantes
-									</LinkButton>
-									<LinkButton href={`/wines?filter=roses`} className="">
-										Rosés
-									</LinkButton>
-								</div>
-							</AccordionContent>
-						</AccordionItem>
-
-						<AccordionItem value="item-3">
-							<div className="flex justify-between gap-2">
-								<LinkButton href={`/about`} className="flex-1">
-									Nossa Historia
-								</LinkButton>
-								<AccordionTrigger className="flex justify-center items-center border-2 border-primary rounded-md p-0 px-[15px]"></AccordionTrigger>
-							</div>
-							<AccordionContent>
-								Yes. It adheres to the WAI-ARIA design pattern.
-							</AccordionContent>
-						</AccordionItem>
-
-						<AccordionItem value="item-4">
-							<div className="flex justify-between gap-2">
-								<LinkButton href={`/contact`} className="flex-1">
-									Nosso Contato
-								</LinkButton>
-								<AccordionTrigger className="flex justify-center items-center border-2 border-primary rounded-md p-0 px-[15px]"></AccordionTrigger>
-							</div>
-							<AccordionContent>
-								Yes. It adheres to the WAI-ARIA design pattern.
-							</AccordionContent>
-						</AccordionItem>
-						
-					</Accordion>
+					<LinkButton href={`/`}>Home</LinkButton>
+					<LinkButton href={`/wines`}>Catalogo</LinkButton>
+					<LinkButton href={`/about`}>Nossa historia</LinkButton>
+					<LinkButton href={`/contact`}>Contact</LinkButton>
 				</LinksMenu>
 			</div>
-			<div>
-				Login
+			<div className="flex justify-between">
+				<Link href={`/auth`} className="p-1 rounded-md border-2 border-primary">
+					Login
+				</Link>
+				<Link href={`/cart`} className="p-1 rounded-md bg-primary text-white w-16 text-center">
+					Cart
+				</Link>
 			</div>
 		</main>
 	);
 };
 
 export default Sidebar;
-
-const PopoverText = (
-	{
-		children,
-	} : {
-		children : React.ReactNode
-	}
-) => {
-	return (
-		<p
-			className={`hover:underline`}
-		>{children}</p>
-	)
-}
 
 const LinkButton = (
 	{
