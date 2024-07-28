@@ -3,6 +3,7 @@ import { Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 
 import { cn } from "@/lib/utils";
+import Content from "@/components/layout/Content";
 
 const font = Source_Sans_3({ subsets: ["latin"] });
 
@@ -19,25 +20,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="br">
-      <body className={cn(font.className, `min-h-screen flex flex-col items-center`, `bg-zinc-950 text-white`)}>
-        <div className={`flex flex-col flex-1 items-center relative w-full`}>
+      <body className={cn(font.className, `flex h-screen`, `bg-zinc-950 text-white`)}>
           <header className="
-            fixed top-0 left-0 
-            flex justify-around items-center
-            w-full h-14 z-50 pt-[10px]
-            border-b-2 border-zinc-800 
-            backdrop-blur-[2px] bg-blend-overlay
+            flex flex-col items-center
+            h-full w-52 z-50 py-[10px]
+            border-r-2 border-zinc-800
             ">
-            <div>Mincas</div>
+            <div>logo</div>
+            <div className="flex-1 flex flex-col justify-center">
+              <div>menu</div>
+            </div>
             <div>Login</div>
           </header>
-          <div className="flex flex-col items-center mt-14 overflow-y-auto h-[1000px] z-0">
-            {children}
+          <div className="flex flex-col flex-1 items-center overflow-y-auto min-h-screen z-0">
+            <Content>
+              {children}
+            </Content>
+            <footer>
+              footer
+            </footer>
           </div>
-        </div>
-        <footer>
-          footer
-        </footer>
       </body>
     </html>
   );
