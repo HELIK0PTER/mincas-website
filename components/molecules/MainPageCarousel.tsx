@@ -9,8 +9,10 @@ import {
 	CarouselNext,
 	CarouselPrevious,
 } from "@/components/ui/carousel"
+import Link from 'next/link';
 
 type wine = {
+	id: string,
 	name: string,
 	image_url: string,
 }
@@ -19,7 +21,7 @@ async function fetchWines() {
 	const client = createClient()
 	const {data, error} = await client
 		.from('wines')
-		.select('name, image_url')
+		.select('id, name, image_url')
 		.limit(5) as {data: wine[], error: any}
 	return (
 
@@ -39,12 +41,22 @@ async function fetchWines() {
 
 						>
 							{
-                  <Image priority={true}
-                         alt={wine.name}
-                         src={wine.image_url}
-                         width={500} height={500}
-                         className={`h-[320px] md:h-[350px] w-auto rounded-xl select-none`}
-                  />
+									<Link href={
+										`/wines/` + wine.id
+									}
+										className='relative hover:group-[wine]:visible'
+									>
+										<Image priority={true}
+													alt={wine.name}
+													src={wine.image_url}
+													width={500} height={500}
+													className={`h-[320px] md:h-[350px] w-auto rounded-xl select-none`}
+										/>
+										<p className='group absolute bottom-5 w-full text-center invisible'>
+											{wine.name}
+										</p>
+									</Link>
+
 								??
                   <div className="lds-dual-ring relative"/>
 							}
