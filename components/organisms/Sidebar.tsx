@@ -1,12 +1,6 @@
 "use client"
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-
+import { FaCartShopping } from "react-icons/fa6";
 
 import Link from "next/link";
 
@@ -15,6 +9,7 @@ import { HorizontalSeparator } from '@/components/atoms/separators';
 import {Logo1} from "@/components/atoms/logos";
 
 import {cn} from "@/lib/utils";
+import { getConnection } from "@/utils/supabase/utils";
 
 import { usePathname } from "next/navigation";
 
@@ -37,18 +32,30 @@ const Sidebar = () => {
 				</LinksMenu>
 			</div>
 			<div className="flex justify-between">
-				<Link href={`/auth`} className="p-1 rounded-md border-2 border-primary">
-					Login
-				</Link>
-				<Link href={`/cart`} className="p-1 rounded-md bg-primary text-white w-16 text-center">
-					Cart
+				<UserButton/>
+				{/* todo : rajouter un ping avec le nombre d'objets dans le cart */}
+				<Link href={`/cart`} className="p-1 rounded-md bg-primary text-white w-16 flex justify-center items-center hover:opacity-75">
+					<FaCartShopping className="h-auto w-5" />
 				</Link>
 			</div>
 		</main>
 	);
 };
-
 export default Sidebar;
+
+const UserButton = async () => {
+
+	return (
+		await getConnection()	?			
+		<Link href={`/auth/login`} className="p-1 rounded-md border-2 border-primary hover:bg-primary hover:text-white">
+			Login
+		</Link>
+		:
+		<Link href={`/user`} className="p-1 rounded-md border-2 border-primary hover:bg-primary hover:text-white">
+			Profile
+		</Link>
+	)
+}
 
 const LinkButton = (
 	{
