@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import {createClient} from "@/utils/supabase/client";
+import {createClient} from "@/utils/supabase/server";
 
 import {
 	Carousel,
@@ -19,12 +19,13 @@ type wine = {
 
 async function fetchWines() {
 	const client = createClient()
-	const {data, error} = await client
+	const {data} = await client
 		.from('wines')
 		.select('id, name, image_url')
 		.limit(5) as {data: wine[], error: any}
-	return (
 
+	if (data)
+	return (
 		<Carousel
 			className={`flex justify-center items-center relative h-full w-full rounded-xl`}
 			opts={{
@@ -69,6 +70,13 @@ async function fetchWines() {
 			<CarouselNext className={`z-50 text-secondary absolute scale-125 top-1/2 right-5 bg-primary`}/>
 		</Carousel>
 	)
+
+	else
+	return (
+		<div className='w-full flex justify-center py-5'>
+			<div className="lds-dual-ring relative"/>
+		</div>
+	)
 }
 
 async function MainPageCarousel () {
@@ -94,6 +102,7 @@ async function MainPageCarousel () {
 					rounded-xl
 					select-none
 					pointer-events-none
+					text-center
 					`}
 			/>
 			{wines}

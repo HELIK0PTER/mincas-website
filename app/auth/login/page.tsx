@@ -1,7 +1,9 @@
 import Section from '@/components/templates/Section'
 import React from 'react'
 
+
 const LoginPage = () => {
+
   return (
     <main>
       <Section>

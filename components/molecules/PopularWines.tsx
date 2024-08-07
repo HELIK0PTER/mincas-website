@@ -1,4 +1,4 @@
-import {createClient} from "@/utils/supabase/client";
+import {createClient} from "@/utils/supabase/server";
 
 import Image from 'next/image'
 import Link from "next/link";
@@ -10,7 +10,9 @@ async function fetchPopularWines() {
 		.from('wines')
 		.select('id, name, image_url, price, spare_normal')
 		.limit(4) as {data: any[], error: any}
-	return (
+	
+		if (data)
+		return (
 		<div 
 			className={`
 				grid gris-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5
@@ -72,6 +74,11 @@ async function fetchPopularWines() {
 				})
 			}
 		</div>
+	)
+	
+	else
+	return (
+		<div className="lds-dual-ring relative"/>
 	)
 }
 

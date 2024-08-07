@@ -8,7 +8,7 @@ import Link from "next/link";
 
 import Section from "@/components/templates/Section";
 
-export default async function Home() {
+export default function Home() {
 
   return (
     <main>

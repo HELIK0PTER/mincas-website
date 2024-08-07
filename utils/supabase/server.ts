@@ -36,3 +36,7 @@ export function createClient() {
 		}
 	)
 }
+
+export function checkConnection(user: any) {
+	return user.email
+}
