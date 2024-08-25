@@ -17,19 +17,21 @@ type LayoutProps = {
   isAuthPage?: boolean;
 };
 
-export default function CombinedLayout({ children, isAuthPage = false }: LayoutProps) {
+export default function CombinedLayout(
+  { 
+    children, 
+  }: 
+  {
+    children: React.ReactNode,
+  }) {
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
-        {isAuthPage ? (
           <div className="flex min-h-screen bg-background text-neutral text-md">
             <div className="w-full">
               {children}
             </div>
           </div>
-        ) : (
-          children
-        )}
       </body>
     </html>
   );
