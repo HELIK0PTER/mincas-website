@@ -12,10 +12,10 @@ const inter = Allerta_Stencil({
   weight: "400",
 });
 
-type LayoutProps = Readonly<{
+type LayoutProps = {
   children: React.ReactNode;
   isAuthPage?: boolean;
-}>;
+};
 
 export default function CombinedLayout({ children, isAuthPage = false }: LayoutProps) {
   return (
