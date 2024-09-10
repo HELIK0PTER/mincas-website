@@ -9,9 +9,10 @@ import { HorizontalSeparator } from '@/components/atoms/separators';
 import {Logo1} from "@/components/atoms/logos";
 
 import {cn} from "@/lib/utils";
-import { getConnection } from "@/utils/supabase/utils";
 
 import { usePathname } from "next/navigation";
+import { createClient } from "@/utils/supabase/client";
+import { useEffect, useState } from "react";
 
 const Sidebar = () => {
 
@@ -25,10 +26,11 @@ const Sidebar = () => {
 			</div>
 			<div className={`flex-1 flex flex-col py-2 justify-start overflow-y-auto`}>
 				<LinksMenu>
-					<LinkButton href={`/`}>Home</LinkButton>
+					<LinkButton href={`/`}>Início</LinkButton>
 					<LinkButton href={`/wines`}>Catalogo</LinkButton>
 					<LinkButton href={`/about`}>Nossa historia</LinkButton>
-					<LinkButton href={`/contact`}>Contact</LinkButton>
+					<LinkButton href={`/contact`}>Contatos</LinkButton>
+					<LinkButton href={`/events`}>Eventos</LinkButton>
 				</LinksMenu>
 			</div>
 			<div className="flex justify-between">
@@ -43,19 +45,49 @@ const Sidebar = () => {
 };
 export default Sidebar;
 
-const UserButton = async () => {
+const supabase = createClient();
 
-	return (
-		await getConnection()	?			
-		<Link href={`/auth/login`} className="p-1 rounded-md border-2 border-primary hover:bg-primary hover:text-white">
-			Login
-		</Link>
-		:
-		<Link href={`/user`} className="p-1 rounded-md border-2 border-primary hover:bg-primary hover:text-white">
-			Profile
-		</Link>
-	)
-}
+const useUser = () => {
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const { data } = await supabase.auth.getUser();
+				const userdata = data.user;
+        setUser(userdata);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkUser();
+  }, []);
+
+  return { user, loading };
+};
+
+const UserButton = () => {
+  const { user, loading } = useUser();
+
+  if (loading) {
+    return <div>Loading...</div>; // Ou un spinner, ou rien si vous préférez
+  }
+
+  return (
+    user ?
+      <Link href={`/user`} className="p-1 rounded-md border-2 border-primary hover:bg-primary hover:text-white">
+        Profile
+      </Link>	
+    :
+      <Link href={`/auth/login`} className="p-1 rounded-md border-2 border-primary hover:bg-primary hover:text-white">
+        Login
+      </Link>
+  );
+};
 
 const LinkButton = (
 	{

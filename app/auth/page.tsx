@@ -12,11 +12,11 @@ import { createClient, checkConnection } from '@/utils/supabase/server'
 const AuthCheck = async () => {
 
   const supabase = createClient()
-  const { data } = await supabase.auth.getUser() as any
+  const { data, error } = await supabase.auth.getUser()
 
-  data.email ? (
+  data.user ? (
     console.log('User is connected'),
-    redirect('/user')
+    redirect('/')
   ) : 
   (
     console.log('User is not connected'),

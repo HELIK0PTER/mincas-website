@@ -3,7 +3,7 @@ import "@/app/globals.css"
 import { Allerta_Stencil } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: "Mincas",
+  title: "Minca",
   description: "Descobra nossa paixão para os vinhos naturais.",
 };
 

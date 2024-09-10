@@ -5,7 +5,7 @@ import Sidebar from "@/components/organisms/Sidebar";
 import Footer from "@/components/organisms/Footer";
 
 export const metadata: Metadata = {
-  title: "Mincas",
+  title: "Minca",
   description: "Descobra nossa paixão para os vinhos naturais.",
 };
 
