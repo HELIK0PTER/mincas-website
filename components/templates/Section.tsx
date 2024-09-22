@@ -13,7 +13,7 @@ const Section = (
 ) => {
 
   return (
-    <section id={props.id} className={`py-6 min-h-[50vh]`}>
+    <section id={props.id} className={`flex min-h-[50vh]`}>
       <Background color={bgColor}>
         {children}
       </Background>

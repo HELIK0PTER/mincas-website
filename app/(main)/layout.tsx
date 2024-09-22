@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import "@/app/globals.css"
-import { Allerta_Stencil } from "next/font/google";
+import { Allerta_Stencil as mainFont } from "next/font/google";
 import Sidebar from "@/components/organisms/Sidebar";
 import Footer from "@/components/organisms/Footer";
 
 export const metadata: Metadata = {
   title: "Minca",
-  description: "Descobra nossa paixão para os vinhos naturais.",
+  description: "Descubra nossa paixão pelos vinhos naturais.",
 };
 
-const inter = Allerta_Stencil({
+const inter = mainFont({
   subsets: ["latin"],
   weight: "400",
 })
@@ -25,7 +25,7 @@ export default function RootLayout({
         <div className="flex h-screen overflow-y-visible">
           <Sidebar />
           <div className="flex flex-col flex-1 justify-between overflow-auto scroll-smooth">
-            <main className="flex flex-col flex-1 py-10">
+            <main className="flex flex-col flex-1">
               {children}
             </main>
             <Footer />

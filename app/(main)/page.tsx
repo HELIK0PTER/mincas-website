@@ -7,6 +7,8 @@ import PopularWines from "@/components/molecules/PopularWines";
 import Link from "next/link";
 
 import Section from "@/components/templates/Section";
+import AvisSimple from "@/components/molecules/AvisSimple";
+import {MainPageEvents} from "@/components/molecules/EventsList";
 
 export default function Home() {
 
@@ -14,7 +16,7 @@ export default function Home() {
     <main>
       <Section id={`presentation`}>
         <div
-          className={`px-20 pb-10 text-center text-7xl w-full`}
+          className={`px-20 pb-10 text-center text-7xl w-full text-primary`}
         >
           <h1>Minca</h1>
           <p>Vinhos Naturais</p>
@@ -33,15 +35,15 @@ export default function Home() {
                 font-medium text-lg`}
               >
                 <p className={`text-center`}>
-                  Descobra nossa paixão para os vinhos naturais.
+                  Descubra nossa paixão pelos vinhos naturais.
                 </p>
                 <p className={`text-center`}>
-                  Biodynamicos, respeituosos da natureza e uma textura unica !
+                  Biodynamicos, respeitosos da natureza e uma textura unica !
                 </p>
               </div>
               <div className={`grid grid-cols-2 gap-5`}>
-                <Button>Nossos Vinhos</Button>
-                <Button>Sobre Nos</Button>
+                <Link href={`/wines`}><Button>Nossos Vinhos</Button></Link>
+                <Link href={`/about`}><Button>Sobre Nos</Button></Link>
               </div>
             </div>
           </div>
@@ -69,9 +71,11 @@ export default function Home() {
           <div className="grid grid-cols-3 items-center gap-5">
             <div className="col-span-2">
               <p>
-                Vinhos naturais são produzidos com mínima intervenção, desde o cultivo das uvas até o engarrafamento. 
-                Eles representam uma abordagem pura e autêntica à vinificação, priorizando práticas sustentáveis e orgânicas.
+                Vinhos naturais são produzidos com mínima intervenção, desde o cultivo das uvas até o engarrafamento.
+                Eles representam uma abordagem pura e autêntica à vinificação, priorizando práticas sustentáveis e
+                orgânicas.
               </p>
+              <br/>
               <p>
                 Na Minca, nossos vinhos naturais são:
               </p>
@@ -79,11 +83,12 @@ export default function Home() {
                 <li>Feitos com uvas cultivadas organicamente, sem pesticidas ou herbicidas sintéticos</li>
                 <li>Fermentados com leveduras nativas presentes naturalmente nas uvas</li>
                 <li>Livres de aditivos ou conservantes artificiais</li>
-                <li>Minimamente filtrados ou não filtrados, preservando sabores e nutrientes</li>
+                <li>Não filtrados, preservando sabores e nutrientes</li>
                 <li>Uma expressão verdadeira do terroir e da safra</li>
               </ul>
+              <br/>
               <p>
-                Ao escolher vinhos naturais Minca, você está optando por uma experiência de degustação única e apoiando 
+                Ao escolher vinhos naturais Minca, você está optando por uma experiência de degustação única e apoiando
                 práticas vinícolas ecologicamente responsáveis.
               </p>
             </div>
@@ -97,9 +102,21 @@ export default function Home() {
           </div>
         </div>
       </Section>
-      <Section bgColor={`primary`} id={`responses`}>
-        <div className="flex">
-          Avis
+      {/*
+        <Section bgColor={`primary`} id={`comments`}>
+          <div className="flex flex-1 w-full">
+            <div className="px-24 flex-1 flex justify-around gap-4">
+              <AvisSimple/>
+              <AvisSimple/>
+              <AvisSimple/>
+            </div>
+          </div>
+        </Section>
+      */}
+      <Section bgColor={`primary`} id={`events`}>
+        <h2 className="text-3xl font-bold mb-8 pl-6 w-full flex justify-start">Próximos Eventos</h2>
+        <div className="xl:flex grid grid-cols-1 md:grid-cols-2 flex-1 gap-5 px-6">
+          <MainPageEvents/>
         </div>
       </Section>
     </main>
