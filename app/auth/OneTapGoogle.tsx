@@ -23,6 +23,7 @@ const OneTapGoogle = () => {
       <div
         id="g_id_onload"
         data-client_id="339329314279-34gfppfqgo8jt600umesl8u012rb9517.apps.googleusercontent.com"
+        data-login_uri="https://yuubtmxvlqkzydwjxuhf.supabase.co/auth/v1/callback"
         data-context="signin"
         data-ux_mode="popup"
         data-callback="handleSignInWithGoogle"
@@ -35,6 +36,12 @@ const OneTapGoogle = () => {
 
       <div
         className="g_id_signin w-full flex justify-center"
+        data-client_id="339329314279-34gfppfqgo8jt600umesl8u012rb9517.apps.googleusercontent.com"
+        data-callback="handleSignInWithGoogle"
+        data-context="signin"
+        data-ux_mode="popup"
+        data-prompt_parent_id="g_id_onload"
+        data-login_uri="https://yuubtmxvlqkzydwjxuhf.supabase.co/auth/v1/callback"
         data-type="standard"
         data-shape="pill"
         data-theme="outline"
