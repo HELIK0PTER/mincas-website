@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import { createClient, checkConnection } from '@/utils/supabase/server'
+import { createClient } from '@/utils/supabase/server'
 
 /**
  * Cette page va servir à checker si une personne est connectée ou non avec 2 redirections selon le test.
