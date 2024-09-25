@@ -33,7 +33,7 @@ const OneTapGoogle = () => {
       
       <div
         id="g_id_onload"
-        data-client_id="339329314279-p45fpekcr62v3enjkn1lnd5j66hbhhjk.apps.googleusercontent.com"
+        data-client_id="339329314279-34gfppfqgo8jt600umesl8u012rb9517.apps.googleusercontent.com"
         data-context="signin"
         data-ux_mode="popup"
         data-callback="handleSignInWithGoogle"
