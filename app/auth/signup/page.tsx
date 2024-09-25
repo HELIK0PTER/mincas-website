@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import React from 'react'
+
 import { signup } from '../actions'
 import AuthButton from '../AuthButton'
 import SimpleMessage from '../SimpleMessage'
