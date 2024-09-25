@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
 
 export default function ErrorMessage() {
   const [message, setMessage] = useState<string | null>(null)
@@ -18,7 +19,9 @@ export default function ErrorMessage() {
 
   return (
     <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
-      <span className="block sm:inline">{message}</span>
+      <Suspense>
+        <span className="block sm:inline">{message}</span>
+      </Suspense>
     </div>
   )
 }
