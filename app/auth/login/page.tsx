@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import React from 'react'
+import { Suspense } from 'react'
 
 import { login } from '../actions'
 import AuthButton from '../AuthButton'
@@ -16,8 +17,10 @@ const LoginPage = () => {
       </Link>
       <div className="w-full max-w-md bg-clear dark:bg-background rounded-lg shadow-md p-8">
         <h1 className="text-3xl font-bold text-center text-primary dark:text-secondary mb-8">Conectar à Minca</h1>
-        <SimpleMessage />
-        <ErrorMessage />
+        <Suspense>
+          <SimpleMessage />
+          <ErrorMessage />
+        </Suspense>
         <form className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-neutral dark:text-neutral-foreground mb-1">
