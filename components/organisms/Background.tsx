@@ -19,7 +19,7 @@ const Background = (
 	};
 
 	return (
-		<div className={twMerge('bg-inherit', `${colorVariants[color]} flex flex-col items-center w-full h-full`)}>
+		<div className={twMerge('bg-inherit', `${colorVariants[color]} flex flex-col py-12 items-center flex-1 relative`)}>
 			{children}
 		</div>
 	);

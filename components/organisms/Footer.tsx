@@ -5,8 +5,9 @@ const Footer = () => {
 		<div
 			className={`
 				w-full h-32
+				pt-6
 				bg-primary
-				flex justify-around items-center
+				flex justify-around items-top
 			`}>
 			<div>
 				partie 1
