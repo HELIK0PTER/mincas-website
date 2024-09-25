@@ -2,8 +2,6 @@
 
 import React from 'react'
 import Script from 'next/script'
-
-import { useRouter } from 'next/router'
 import { createClient } from '@/utils/supabase/client'
 
 const OneTapGoogle = () => {
@@ -11,19 +9,10 @@ const OneTapGoogle = () => {
   const supabase = createClient()
 
   async function handleSignInWithGoogle(response : any) {
-    const { data, error } = await supabase.auth.signInWithOAuth({
+    const { data, error } = await supabase.auth.signInWithIdToken({
       provider: 'google',
-      options: {
-        redirectTo: `http://example.com/auth/callback`,
-      },
+      token: response.credential,
     })
-
-    if (error) {
-      console.error('Error logging in with Google:', error)
-      return
-    }
-
-    console.log('data', data)
   }
 
 
