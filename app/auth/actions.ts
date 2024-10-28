@@ -47,25 +47,19 @@ export async function signup(formData: FormData) {
   const { data : signdata , error } = await supabase.auth.signUp({
     email: data.email,
     password: data.password,
-    options: {
-      emailRedirectTo : 'http://localhost:3000/auth/login?message=' + encodeURIComponent('Pronto ! Você pode fazer login agora.'),
-    }
   })
 
   if (error) {
     redirect('/auth/signup?error=' + encodeURIComponent(error.message))
   }
 
-  console.log("user: " + signdata.user)
+  console.log("user: " + signdata.user?.created_at)
   console.log("session: " + signdata.session)
 
-
-  if (signdata.user) {
-    // redirect('/auth/signup?error=' + encodeURIComponent('Essa conta já existe. Faça login.'))
+  if (signdata.user?.email == null) {
+    redirect('/auth/login?message=' + encodeURIComponent('Essa conta já foi confirmada. Não é necessário confirmar novamente.'))
   }
-  
-  // Révalidation du chemin après inscription réussie
-  // redirect('/auth/signup?message=' + encodeURIComponent('Conta criada com sucesso! Valide seu email para fazer login.'))
+
 }
 
 // Fonction de déconnexion

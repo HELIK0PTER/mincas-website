@@ -14,7 +14,7 @@ async function getWines() {
 	const {data, error} = await supabase.from("wines").select("*");
 	if (error) throw error;
 	return (
-		<div className={`my-2 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5`}>
+		<div className={`my-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5`}>
 			{data.map((wine) => (
 				<CatalogItem
 					key={wine.id}
@@ -35,7 +35,7 @@ export default async function Page() {
 	return (
 		<main>
 			<Section id={`wines`}>
-				<div className={`absolute top-4 left-4`}>
+				<div className={`absolute top-4 left-0`}>
 					<Breadcrumb>
 						<BreadcrumbList>
 							<BreadcrumbItem>

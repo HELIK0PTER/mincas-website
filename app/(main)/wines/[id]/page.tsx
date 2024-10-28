@@ -51,7 +51,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 	const wine = await getWine(params.id);
 	return (
 		<Background>
-			<div className={`absolute top-4 left-4`}>
+			<div className={`absolute top-4 left-0`}>
 				<Breadcrumb>
 					<BreadcrumbList>
 						<BreadcrumbItem>

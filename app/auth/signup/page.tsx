@@ -28,9 +28,8 @@ const SignUpPage = () => {
             <input
               id="email"
               name="email"
-              type="email"
+              type="text"
               autoComplete="email"
-              required
               className="w-full px-3 py-2 bg-clear dark:bg-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
@@ -43,7 +42,6 @@ const SignUpPage = () => {
               name="password"
               type="password"
               autoComplete="new-password"
-              required
               className="w-full px-3 py-2 bg-clear dark:bg-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>

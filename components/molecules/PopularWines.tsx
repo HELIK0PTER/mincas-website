@@ -15,7 +15,7 @@ async function fetchPopularWines() {
 		return (
 		<div 
 			className={`
-				grid gris-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5
+				grid gris-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5
 			`}
 		>
 			{

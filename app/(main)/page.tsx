@@ -16,12 +16,12 @@ export default function Home() {
     <main>
       <Section id={`presentation`}>
         <div
-          className={`px-20 pb-10 text-center text-7xl w-full text-primary`}
+          className={`px-20 pb-10 text-center text-3xl md:text-7xl w-full text-primary`}
         >
           <h1>Minca</h1>
           <p>Vinhos Naturais</p>
         </div>
-        <div className={`flex flex-col xl:flex-row gap-20 justify-center items-center`}>
+        <div className={`flex flex-col lg:flex-row gap-20 justify-center items-center`}>
           <div
             className={`flex flex-col justify-between items-center w-[350px] md:w-[400px] h-[350px] md:h-[380px]`}
           >
@@ -68,7 +68,7 @@ export default function Home() {
       <Section id={`about`}>
         <div className="max-w-4xl mx-auto px-4 py-16">
           <h2 className="text-3xl font-bold text-primary dark:text-secondary mb-8">Sobre Vinhos Naturais</h2>
-          <div className="grid grid-cols-3 items-center gap-5">
+          <div className="grid grid-cols-3 items-center gap-5 bg-neutral-100/50 md:bg-neutral-100/0 p-3 rounded-lg relative">
             <div className="col-span-2">
               <p>
                 Vinhos naturais são produzidos com mínima intervenção, desde o cultivo das uvas até o engarrafamento.
@@ -92,13 +92,15 @@ export default function Home() {
                 práticas vinícolas ecologicamente responsáveis.
               </p>
             </div>
-            <Image
-              src="/image5.jpg"
-              alt="Vinhos Naturais"
-              width={800}
-              height={400}
-              className="rounded-lg"
-            />
+            <div className={`absolute -z-10 p-14 md:p-0 md:relative`}>
+              <Image
+                src="/image5.jpg"
+                alt="Vinhos Naturais"
+                width={800}
+                height={400}
+                className="rounded-lg"
+              />
+            </div>
           </div>
         </div>
       </Section>
@@ -113,9 +115,17 @@ export default function Home() {
           </div>
         </Section>
       */}
+
       <Section bgColor={`primary`} id={`events`}>
-        <h2 className="text-3xl font-bold mb-8 pl-6 w-full flex justify-start">Próximos Eventos</h2>
-        <div className="xl:flex grid grid-cols-1 md:grid-cols-2 flex-1 gap-5 px-6">
+        <h2 className="text-3xl font-bold mb-8 pl-6 w-full flex justify-center">Nossos Vinhos Especiais</h2>
+        <>
+          Special wines
+        </>
+      </Section>
+
+      <Section id={`events`}>
+        <h2 className="text-3xl text-primary font-bold mb-8 pl-6 w-full">Próximos Eventos</h2>
+        <div className="xl:flex grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 flex-1 gap-5 px-6">
           <MainPageEvents/>
         </div>
       </Section>
