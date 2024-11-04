@@ -30,7 +30,7 @@ const Sidebar = () => {
 					<Hamburger toggled={isOpen} toggle={setIsOpen} size={20}/>
 				</div>
 				<main className={`flex flex-col w-72 py-4 h-screen bg-secondary border-r-2 border-primary`}>
-					<Link href={`/public`} onClick={handleMenu} className="px-2"><Logo1/></Link>
+					<Link href={`/`} onClick={handleMenu} className="px-2"><Logo1/></Link>
 					<div className="flex flex-col justify-between mt-2 px-2">
 						<HorizontalSeparator/>
 						<SearchBar/>
