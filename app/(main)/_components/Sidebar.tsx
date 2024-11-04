@@ -27,7 +27,7 @@ const Sidebar = () => {
 		<div className={`relative`}>
 			<div className={`fixed top-0 bottom-0 ${isOpen ? `left-0` : `-left-72`} z-[999] transition-all duration-500`}>
 				<div className={`absolute z-10 top-4 -right-14 bg-secondary rounded-xl shadow-md`} onClick={handleMenu}>
-					<Hamburger toggled={isOpen} toggle={setIsOpen} size={20}/>
+					<Hamburger toggled={isOpen} toggle={setIsOpen} size={BUTTON_SIZE}/>
 				</div>
 				<main className={`flex flex-col w-72 py-4 h-screen bg-secondary border-r-2 border-primary`}>
 					<Link href={`/`} onClick={handleMenu} className="px-2"><Logo1/></Link>
@@ -82,8 +82,8 @@ const useUser = () => {
 			}
 		};
 
-		checkUser();
-	}, []);
+		checkUser().then(r => r);
+	}, [supabase.auth]);
 
 	return {user, loading};
 };
