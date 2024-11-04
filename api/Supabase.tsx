@@ -4,23 +4,18 @@ import { Wine } from "@/types/Wine";
 export const supabase = createClient()
 
 // Connected user logic
-
 export const User	=	async () => {
-	const {data: user, error} = await supabase.auth.getUser()
-
+	const {data, error} = await supabase.auth.getUser()
 	if (error) {
 		throw new Error(error.message)
 	}
 
-	return user
+	return data.user
 }
 
-
 // Admin logic
-
 export const DeleteUser = async (uuid : string) => {
 	const {error} = await supabase.auth.admin.deleteUser(uuid)
-
 	if (error) {
 		throw new Error(error.message)
 	}
