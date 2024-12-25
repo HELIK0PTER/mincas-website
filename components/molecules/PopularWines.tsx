@@ -8,7 +8,7 @@ async function fetchPopularWines() {
 	const client = createClient()
 	const {data} = await client
 		.from('wines')
-		.select('id, name, image_url, price, spare_normal')
+		.select('id, name, image_url, price, spare_quantity')
 		.limit(4) as {data: any[], error: any}
 	
 		if (data)
@@ -66,7 +66,7 @@ async function fetchPopularWines() {
 									{wine.price} R$
 								</p>
 								<p className={`mt-3`}>
-									Stock : {wine.spare_normal}
+									Stock : {wine.spare_quantity}
 								</p>
 							</div>
 						</Link>

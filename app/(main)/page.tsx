@@ -16,10 +16,12 @@ export default function Home() {
     <main>
       <Section id={`presentation`}>
         <div
-          className={`px-20 pb-10 text-center text-3xl md:text-7xl w-full text-primary`}
+          className={`flex flex-col gap-4 px-20 pb-10 text-center w-full text-primary`}
         >
-          <h1>Minca</h1>
-          <p>Vinhos Naturais</p>
+          <h1 className={`flex justify-center text-6xl md:text-8xl`}>
+            <p className={`bg-clip-text text-transparent bg-gradient-to-r from-green-900 to-green-200 `}>Minca</p>
+          </h1>
+          <p className={`text-3xl md:text-6xl`}>Vinhos Naturais</p>
         </div>
         <div className={`flex flex-col lg:flex-row gap-20 justify-center items-center`}>
           <div
@@ -68,33 +70,42 @@ export default function Home() {
       <Section id={`about`}>
         <div className="max-w-4xl mx-auto px-4 py-16">
           <h2 className="text-3xl font-bold text-primary dark:text-secondary mb-8">Sobre Vinhos Naturais</h2>
-          <div className="grid grid-cols-3 items-center gap-5 bg-neutral-100/50 md:bg-neutral-100/0 p-3 rounded-lg relative">
+          <div className="grid md:grid-cols-3 items-center gap-8 p-3 rounded-lg relative">
             <div className="col-span-2">
-              <p>
-                Vinhos naturais são produzidos com mínima intervenção, desde o cultivo das uvas até o engarrafamento.
-                Eles representam uma abordagem pura e autêntica à vinificação, priorizando práticas sustentáveis e
-                orgânicas.
+              <p className="">
+                Vinhos naturais são produzidos com <span className="font-semibold text-primary">mínima intervenção</span>, do cultivo
+                das uvas ao engarrafamento, priorizando <span
+                className="text-primary">práticas sustentáveis e orgânicas</span>.
               </p>
               <br/>
-              <p>
-                Na Minca, nossos vinhos naturais são:
+              <p className="font-bold text-lg">
+                Na <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-800 to-green-400">Minca</span>, nossos vinhos naturais são:
               </p>
-              <ul className="list-disc pl-6 space-y-2">
-                <li>Feitos com uvas cultivadas organicamente, sem pesticidas ou herbicidas sintéticos</li>
-                <li>Fermentados com leveduras nativas presentes naturalmente nas uvas</li>
-                <li>Livres de aditivos ou conservantes artificiais</li>
-                <li>Não filtrados, preservando sabores e nutrientes</li>
-                <li>Uma expressão verdadeira do terroir e da safra</li>
+              <ul className="list-disc pl-6 space-y-2 text-pretty">
+                <li className="">
+                  Feitos com <span className="text-primary underline">uvas cultivadas organicamente</span>, sem químicos
+                  sintéticos
+                </li>
+                <li className="">
+                  Fermentados com <span className="text-primary underline">leveduras naturais</span>
+                </li>
+                <li className="">
+                  <span className="bg-clip-text text-transparent bg-primary">Livres de aditivos</span> e conservantes
+                  artificiais
+                </li>
+                <li className="">
+                  Não filtrados, preservando <span className="text-primary">sabores e nutrientes</span>
+                </li>
               </ul>
               <br/>
-              <p>
-                Ao escolher vinhos naturais Minca, você está optando por uma experiência de degustação única e apoiando
-                práticas vinícolas ecologicamente responsáveis.
+              <p className="font-bold text-lg">
+                Escolher os vinhos naturais da <span className="bg-clip-text text-transparent bg-primary">Minca</span> é
+                experimentar algo único e apoiar uma vinicultura <span className="text-primary">ecologicamente responsável</span>.
               </p>
             </div>
-            <div className={`absolute -z-10 p-14 md:p-0 md:relative`}>
+            <div className={`hidden z-10 md:block relative`}>
               <Image
-                src="/image5.jpg"
+                src="/Image5.jpg"
                 alt="Vinhos Naturais"
                 width={800}
                 height={400}
@@ -117,14 +128,14 @@ export default function Home() {
       */}
 
       <Section bgColor={`primary`} id={`events`}>
-        <h2 className="text-3xl font-bold mb-8 pl-6 w-full flex justify-center">Nossos Vinhos Especiais</h2>
+        <h2 className="text-3xl font-bold mb-8 md:pl-6 w-full flex justify-center">Nossos Vinhos Especiais</h2>
         <>
           Special wines
         </>
       </Section>
 
       <Section id={`events`}>
-        <h2 className="text-3xl text-primary font-bold mb-8 pl-6 w-full">Próximos Eventos</h2>
+        <h2 className="text-3xl text-primary text-center md:text-left font-bold mb-8 md:pl-6 w-full">Próximos Eventos</h2>
         <div className="xl:flex grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 flex-1 gap-5 px-6">
           <MainPageEvents/>
         </div>
