@@ -6,7 +6,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <div className="relative w-full h-14">
-        <div className="absolute top-0 right-10">
+        <div className="absolute top-4 right-10">
           <LogoutButton />
         </div>
       </div>

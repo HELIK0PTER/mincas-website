@@ -73,6 +73,11 @@ export async function signup(formData: FormData) {
         )
     );
   }
+
+  redirect(
+    "/auth/login?message=" +
+      encodeURIComponent("Conta criada com sucesso. Por favor, faça login.")
+  );
 }
 
 // Fonction de déconnexion

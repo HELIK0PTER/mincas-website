@@ -13,6 +13,8 @@ import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { User } from "@supabase/auth-js";
+import Image from "next/image";
+import { UserCircle } from "lucide-react";
 
 const useUser = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -87,11 +89,34 @@ const Sidebar = () => {
         <main
           className={`flex flex-col w-72 py-4 h-screen bg-secondary border-r-2 border-primary`}
         >
-          <Link href={`/`} onClick={handleMenu} className="px-2">
+          <Link href={`/`} onClick={handleMenu} className="px-2 mb-2">
             <Logo1 />
           </Link>
-          <div className="flex flex-col justify-between mt-2 px-2">
-            <HorizontalSeparator />
+          <div className="flex flex-col justify-between px-2">
+            <div className="flex justify-between py-2">
+              <UserButton onClick={handleMenu} />
+              {/* todo : rajouter un ping avec le nombre d'objets dans le cart */}
+              {user && (
+                <div className="relative">
+                  <Link
+                    href={`/cart`}
+                    className="p-2 rounded-md bg-primary text-white w-16 flex justify-center items-center hover:opacity-75"
+                  >
+                    <FaCartShopping className="h-auto w-5" />
+                  </Link>
+                  {cartSize > 0 && (
+                    <Badge
+                      variant="destructive"
+                      className="absolute -top-2 -right-2 border border-primary"
+                    >
+                      {cartSize}
+                    </Badge>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="flex flex-col justify-between px-2">
             <SearchBar />
             <HorizontalSeparator />
           </div>
@@ -116,28 +141,6 @@ const Sidebar = () => {
               </LinkButton>
             </LinksMenu>
           </div>
-          <div className="flex justify-between px-4">
-            <UserButton onClick={handleMenu} />
-            {/* todo : rajouter un ping avec le nombre d'objets dans le cart */}
-            {user && (
-              <div className="relative">
-                <Link
-                  href={`/cart`}
-                  className="p-1 rounded-md bg-primary text-white w-16 flex justify-center items-center hover:opacity-75"
-                >
-                  <FaCartShopping className="h-auto w-5" />
-                </Link>
-                {cartSize > 0 && (
-                  <Badge
-                    variant="destructive"
-                    className="absolute -top-2 -right-2 border border-primary"
-                  >
-                    {cartSize}
-                  </Badge>
-                )}
-              </div>
-            )}
-          </div>
         </main>
       </div>
       <div
@@ -161,17 +164,31 @@ const UserButton = ({ onClick }: { onClick: () => void }) => {
   return (
     <>
       {user ? (
-        <Link
-          href={`/user`}
-          className="p-1 rounded-md border-2 border-primary hover:bg-primary hover:text-white"
-          onClick={onClick}
-        >
-          Profile
-        </Link>
+        <>
+          <Link
+            href={`/user`}
+            className="rounded-full border-2 border-primary hover:bg-primary hover:text-white"
+            onClick={onClick}
+          >
+            {user.user_metadata.avatar_url ? (
+              <Image
+                src={user.user_metadata.avatar_url}
+                alt="User"
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+            ) : (
+              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                <UserCircle className="w-8 h-8 text-primary-foreground" />
+              </div>
+            )}
+          </Link>
+        </>
       ) : (
-        <Link 
+        <Link
           href={`/auth/login`}
-          className="p-1 rounded-md border-2 border-primary hover:bg-primary hover:text-white"
+          className="w-full text-center p-1 rounded-md border-2 border-primary hover:bg-primary hover:text-white"
         >
           Login
         </Link>
