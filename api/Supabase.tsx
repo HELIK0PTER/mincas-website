@@ -1,7 +1,7 @@
-import { createClient} from "@/utils/supabase/server";
+import { createClient } from "@/utils/supabase/server";
 import { Wine } from "@/types/Wine";
 
-export const supabase = createClient()
+export const supabase = await createClient()
 
 // Connected user logic
 export const User	=	async () => {

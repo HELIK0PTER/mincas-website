@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import React from "react";
 import { Suspense } from "react";
 
@@ -7,86 +6,70 @@ import { signup } from "../actions";
 import AuthButton from "../AuthButton";
 import SimpleMessage from "../SimpleMessage";
 import ErrorMessage from "../ErrorMessage";
-
+import * as Form from "../auth-form"
+import OneTapGoogle from "../OneTapGoogle";
 const SignUpPage = () => {
   return (
-    <main className="flex items-center justify-center min-h-screen relative bg-secondary dark:bg-primary p-4">
-      <Link
-        href="/"
-        className="absolute top-6 left-6 text-primary dark:text-secondary hover:opacity-80 transition-opacity"
-      >
-        <Image src="/Logo1.png" alt="Minca" width={200} height={200} priority />
-      </Link>
-      <div className="w-full max-w-md bg-clear dark:bg-background rounded-lg shadow-md p-8">
-        <h1 className="text-3xl font-bold text-center text-primary dark:text-secondary mb-8">
-          Registrar à Minca
-        </h1>
-        <Suspense>
-          <SimpleMessage />
-          <ErrorMessage />
-        </Suspense>
-        <form className="space-y-6">
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-neutral dark:text-neutral-foreground mb-1"
-            >
-              Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="text"
-              autoComplete="email"
-              className="w-full px-3 py-2 bg-clear dark:bg-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-neutral dark:text-neutral-foreground mb-1"
-            >
-              Password
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              autoComplete="new-password"
-              className="w-full px-3 py-2 bg-clear dark:bg-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-          </div>
-          <AuthButton action={signup} variant="signup">
-            Sign up
-          </AuthButton>
-        </form>
-        <p className="mt-4 text-center text-sm text-neutral dark:text-neutral-foreground">
-          Already have an account?{" "}
-          <Link
-            href="/auth/login"
-            className="text-primary dark:text-secondary hover:underline"
-          >
-            Log in
-          </Link>
-        </p>
-        <p className="mt-4 text-center text-sm text-neutral dark:text-neutral-foreground">
-          By signing up, you agree to our{" "}
-          <Link
-            href="/(main)/legal/terms"
-            className="text-primary dark:text-secondary hover:underline"
-          >
-            Terms of Service
-          </Link>{" "}
-          and{" "}
-          <Link
-            href="/app/(main)/legal/legal-notices/privacy"
-            className="text-primary dark:text-secondary hover:underline"
-          >
-            Privacy Policy
-          </Link>
-        </p>
-      </div>
-    </main>
+    <>
+      <h1 className="text-3xl font-bold text-center text-primary dark:text-secondary mb-8">
+        Registrar à Minca
+      </h1>
+      <Suspense>
+        <SimpleMessage />
+        <ErrorMessage />
+      </Suspense>
+      <form className="space-y-6">
+        <div>
+          <Form.AuthInput
+            id="email"
+            label="Email"
+            name="email"
+            type="text"
+            autoComplete="email"
+            required
+          />
+        </div>
+        <div>
+          <Form.AuthInput
+            id="password"
+            label="Senha"
+            name="password"
+            type="password"
+            autoComplete="new-password"
+            required
+          />
+        </div>
+        <AuthButton action={signup} variant="signup">
+          Sign up
+        </AuthButton>
+        <OneTapGoogle variant="signup" />
+      </form>
+      <p className="mt-4 text-center text-sm text-neutral dark:text-neutral-foreground">
+        Já tem uma conta?{" "}
+        <Link
+          href="/auth/login"
+          className="text-primary dark:text-secondary hover:underline"
+        >
+          Log in
+        </Link>
+      </p>
+      <p className="mt-4 text-center text-sm text-neutral dark:text-neutral-foreground">
+        Ao se registrar, você concorda com nossos{" "}
+        <Link
+          href="/legal/terms"
+          className="text-primary dark:text-secondary hover:underline"
+        >
+          Termos de Serviço
+        </Link>{" "}
+        e{" "}
+        <Link
+          href="/legal/legal-notices/privacy"
+          className="text-primary dark:text-secondary hover:underline"
+        >
+          Política de Privacidade
+        </Link>
+      </p>
+    </>
   );
 };
 

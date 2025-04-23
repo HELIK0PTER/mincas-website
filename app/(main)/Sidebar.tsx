@@ -11,13 +11,59 @@ import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
-import { Badge } from "@heroui/badge";
+import { Badge } from "@/components/ui/badge";
 import { User } from "@supabase/auth-js";
+
+const useUser = () => {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const supabase = createClient();
+
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const { data } = await supabase.auth.getUser();
+        const userdata = data.user;
+        return userdata;
+      } catch (error) {
+        console.error("Error fetching user:", error);
+        return null;
+      }
+    };
+    checkUser().then((r) => {
+      setUser(r);
+      setLoading(false);
+    });
+  }, [supabase.auth]);
+
+  return { user, loading };
+};
+
+const useCartSize = () => {
+  const supabase = createClient();
+  const [cartSize, setCartSize] = useState<number>(0);
+
+  const fetchCartSize = useCallback(async () => {
+    const { data: userData } = await supabase.auth.getUser();
+    const { data: cartData } = await supabase
+      .from("cart")
+      .select("id")
+      .eq("user_id", userData.user?.id);
+    setCartSize(cartData?.length || 0);
+  }, [supabase]);
+
+  useEffect(() => {
+    fetchCartSize();
+  }, [fetchCartSize, supabase]);
+
+  return cartSize;
+};
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
-
   const { user } = useUser();
+  const cartSize = useCartSize();
 
   const handleMenu = () => {
     setIsOpen(!isOpen);
@@ -71,20 +117,25 @@ const Sidebar = () => {
             </LinksMenu>
           </div>
           <div className="flex justify-between px-4">
-            <UserButton />
+            <UserButton onClick={handleMenu} />
             {/* todo : rajouter un ping avec le nombre d'objets dans le cart */}
             {user && (
-              <Badge
-                content={useCartSize()}
-                className={`${useCartSize() === 0 ? "hidden" : "flex"}`}
-              >
+              <div className="relative">
                 <Link
                   href={`/cart`}
                   className="p-1 rounded-md bg-primary text-white w-16 flex justify-center items-center hover:opacity-75"
                 >
                   <FaCartShopping className="h-auto w-5" />
                 </Link>
-              </Badge>
+                {cartSize > 0 && (
+                  <Badge
+                    variant="destructive"
+                    className="absolute -top-2 -right-2 border border-primary"
+                  >
+                    {cartSize}
+                  </Badge>
+                )}
+              </div>
             )}
           </div>
         </main>
@@ -100,52 +151,32 @@ const Sidebar = () => {
 };
 export default Sidebar;
 
-const useUser = () => {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  const supabase = createClient();
-
-  useEffect(() => {
-    const checkUser = async () => {
-      try {
-        const { data } = await supabase.auth.getUser();
-        const userdata = data.user;
-        setUser(userdata);
-      } catch (error) {
-        console.error("Error fetching user:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    checkUser().then((r) => r);
-  }, [supabase.auth]);
-
-  return { user, loading };
-};
-
-const UserButton = () => {
+const UserButton = ({ onClick }: { onClick: () => void }) => {
   const { user, loading } = useUser();
 
   if (loading) {
     return <div>Loading...</div>; // Ou un spinner, ou rien si vous préférez
   }
 
-  return user ? (
-    <Link
-      href={`/user`}
-      className="p-1 rounded-md border-2 border-primary hover:bg-primary hover:text-white"
-    >
-      Profile
-    </Link>
-  ) : (
-    <Link
-      href={`/auth/login`}
-      className="p-1 rounded-md border-2 border-primary hover:bg-primary hover:text-white"
-    >
-      Login
-    </Link>
+  return (
+    <>
+      {user ? (
+        <Link
+          href={`/user`}
+          className="p-1 rounded-md border-2 border-primary hover:bg-primary hover:text-white"
+          onClick={onClick}
+        >
+          Profile
+        </Link>
+      ) : (
+        <Link 
+          href={`/auth/login`}
+          className="p-1 rounded-md border-2 border-primary hover:bg-primary hover:text-white"
+        >
+          Login
+        </Link>
+      )}
+    </>
   );
 };
 
@@ -183,26 +214,6 @@ const LinkButton = ({
       {children}
     </Link>
   );
-};
-
-const useCartSize = () => {
-  const supabase = createClient();
-  const [cartSize, setCartSize] = useState<number>(0);
-
-  const fetchCartSize = useCallback(async () => {
-    const { data: userData } = await supabase.auth.getUser();
-    const { data: cartData } = await supabase
-      .from("cart")
-      .select("id")
-      .eq("user_id", userData.user?.id);
-    setCartSize(cartData?.length || 0);
-  }, [supabase]);
-
-  useEffect(() => {
-    fetchCartSize();
-  }, [fetchCartSize, supabase]);
-
-  return cartSize;
 };
 
 const LinksMenu = ({ children }: { children: React.ReactNode }) => {

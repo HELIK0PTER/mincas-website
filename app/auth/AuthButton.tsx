@@ -3,6 +3,7 @@
 import React from "react";
 import { useFormStatus } from "react-dom";
 import { login, signup } from "./actions";
+import { Button } from "@/components/ui/button";
 
 type AuthButtonProps = {
   action: typeof login | typeof signup;
@@ -18,17 +19,15 @@ export default function AuthButton({
   const { pending } = useFormStatus();
 
   return (
-    <button
+    <Button
       type="submit"
       formAction={action}
       disabled={pending}
-      className={`w-full py-2 px-4 rounded-md hover:bg-opacity-90 transition-colors duration-200 ${
-        variant === "login"
-          ? "bg-primary text-primary-foreground"
-          : "bg-secondary text-secondary-foreground"
-      } ${pending ? "opacity-70 cursor-not-allowed" : ""}`}
+      variant={variant === "login" ? "default" : "secondary"}
+      className={`w-full py-2 px-4 rounded-md transition-colors duration-200
+        ${pending ? "opacity-70 cursor-not-allowed" : ""}`}
     >
       {pending ? "Loading..." : children}
-    </button>
+    </Button>
   );
 }

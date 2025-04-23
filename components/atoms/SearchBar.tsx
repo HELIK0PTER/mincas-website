@@ -37,7 +37,7 @@ const SearchBar = () => {
         />
         <button
           type={`submit`}
-          className={`text-clear`}
+          className={`text-primary-foreground`}
           disabled={search == ""}
         >
           <FaSearch />

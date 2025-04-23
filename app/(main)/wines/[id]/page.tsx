@@ -125,8 +125,10 @@ async function getWine(id: string) {
   <div className="text-center py-10">Vinho não encontrado</div>;
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const wine = await getWine(params.id);
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+
+  const wine = await getWine(id);
   return (
     <Background>
       <div className="absolute top-[30px] sm:top-4 left-4 z-10">
