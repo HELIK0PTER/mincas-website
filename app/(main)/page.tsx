@@ -78,7 +78,7 @@ export default function Home() {
         >
           <PopularWines />
           <Link href={`/wines`}>
-            <Button>Ver Mais</Button>
+            <Button variant={`secondary`}>Ver Mais</Button>
           </Link>
         </div>
       </Section>
