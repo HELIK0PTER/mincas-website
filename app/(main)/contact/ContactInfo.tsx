@@ -1,4 +1,3 @@
-// app/contatos/ContactInfo.tsx
 'use client';
 
 import React from 'react';

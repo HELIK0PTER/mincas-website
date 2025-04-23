@@ -1,22 +1,18 @@
-import React from 'react'
+import React from "react";
 
-import LogoutButton from '@/components/atoms/LogoutButton'
+import LogoutButton from "@/components/atoms/LogoutButton";
 
-const layout = (
-  props: any
-) => {
+const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
-      <div className='relative w-full h-14'>
-        <div className='absolute top-0 right-10'>
-          <LogoutButton/>
+      <div className="relative w-full h-14">
+        <div className="absolute top-0 right-10">
+          <LogoutButton />
         </div>
       </div>
-      <div>
-        {props.children}
-      </div>
+      <div>{children}</div>
     </div>
-  )
-}
+  );
+};
 
-export default layout
+export default layout;

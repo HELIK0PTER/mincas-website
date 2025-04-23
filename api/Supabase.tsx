@@ -30,7 +30,6 @@ export const MakeAdmin = async (uuid : string) => {
 }
 
 // Wines logic
-
 export const Wines = async () => {
 	const {data: wines, error} = await supabase.from('wines').select('*')
 

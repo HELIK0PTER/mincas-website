@@ -1,3 +1,5 @@
+import React from "react";
+
 import {createClient} from "@/utils/supabase/client";
 import Section from "@/components/templates/Section";
 import CatalogItem from "@/components/molecules/CatalogItem";

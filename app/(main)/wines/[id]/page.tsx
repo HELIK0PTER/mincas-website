@@ -1,3 +1,5 @@
+import React from "react";
+
 import Background from "@/components/organisms/Background";
 import {createClient} from "@/utils/supabase/client";
 import {price} from "@/utils/functions";
