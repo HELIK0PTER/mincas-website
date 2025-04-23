@@ -1,6 +1,6 @@
 import React from "react";
 
-import Sidebar from "@/app/(main)/Sidebar";
+import Sidebar from "./Sidebar";
 import Footer from "@/components/organisms/Footer";
 
 export default function Layout({
