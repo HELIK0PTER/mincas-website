@@ -16,6 +16,33 @@ import { User } from "@supabase/auth-js";
 import Image from "next/image";
 import { UserCircle } from "lucide-react";
 
+const Links = [
+  {
+    name : "Início",
+    url : "/"
+  },
+  {
+    name : "Catálogo",
+    url : "/wines"
+  },
+  {
+    name : "Nossa história",
+    url : "/about"
+  },
+  {
+    name : "Eventos",
+    url : "/events"
+  },
+  {
+    name : "Contatos",
+    url : "/contact"
+  },
+  {
+    name : "Na Mídia",
+    url : "/media"
+  },
+]
+
 const useUser = () => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -124,21 +151,11 @@ const Sidebar = () => {
             className={`flex-1 flex flex-col py-2 justify-start overflow-y-auto`}
           >
             <LinksMenu>
-              <LinkButton href={`/`} onClick={handleMenu}>
-                Início
-              </LinkButton>
-              <LinkButton href={`/wines`} onClick={handleMenu}>
-                Catálogo
-              </LinkButton>
-              <LinkButton href={`/about`} onClick={handleMenu}>
-                Nossa história
-              </LinkButton>
-              <LinkButton href={`/contact`} onClick={handleMenu}>
-                Contatos
-              </LinkButton>
-              <LinkButton href={`/events`} onClick={handleMenu}>
-                Eventos
-              </LinkButton>
+              {Links.map(({name, url}) => (
+                <LinkButton href={url} onClick={handleMenu}>
+                  {name}
+                </LinkButton>
+              ))}
             </LinksMenu>
           </div>
         </main>
