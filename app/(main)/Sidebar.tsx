@@ -151,8 +151,8 @@ const Sidebar = () => {
             className={`flex-1 flex flex-col py-2 justify-start overflow-y-auto`}
           >
             <LinksMenu>
-              {Links.map(({name, url}) => (
-                <LinkButton href={url} onClick={handleMenu}>
+              {Links.map(({name, url}, index) => (
+                <LinkButton key={index} href={url} onClick={handleMenu}>
                   {name}
                 </LinkButton>
               ))}
